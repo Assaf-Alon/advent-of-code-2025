@@ -10,8 +10,27 @@ import advent.of.code.day00.Day00;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Day00Test {
-    @Test void appHasAGreeting() {
+    @Test
+    void day00_exampleA() {
         Day00 classUnderTest = new Day00();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+        assertEquals(1, classUnderTest.solvePartA("example00.txt"));
+    }
+
+    @Test
+    void day00_inputA() {
+        Day00 classUnderTest = new Day00();
+        assertEquals(2, classUnderTest.solvePartA("day00.txt"));
+    }
+
+    @Test
+    void day00_exampleB() {
+        Day00 classUnderTest = new Day00();
+        assertEquals(2, classUnderTest.solvePartB("example00.txt"));
+    }
+
+    @Test
+    void day00_inputB() {
+        Day00 classUnderTest = new Day00();
+        assertEquals(23, classUnderTest.solvePartB("day00.txt"));
     }
 }

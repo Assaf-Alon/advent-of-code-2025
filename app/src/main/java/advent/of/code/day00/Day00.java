@@ -3,6 +3,8 @@
  */
 package advent.of.code.day00;
 
+import advent.of.code.util.InputUtils;
+
 public class Day00 {
     public String getGreeting() {
         return "Hello World!";
@@ -10,5 +12,45 @@ public class Day00 {
 
     public static void main(String[] args) {
         System.out.println(new Day00().getGreeting());
+    }
+
+    public int solvePartA(String resourceFileName) {
+        String path = resourceFileName.startsWith("inputs/") ? resourceFileName : "inputs/" + resourceFileName;
+
+        char[][] m = InputUtils.getContentAsMatrix(path);
+        int count = 0;
+        int rows = m.length;
+        int cols = m[0].length;
+        for (int r = 0; r + 1 < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (m[r][c] == m[r + 1][c]) count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int solvePartB(String resourceFileName) {
+        String path = resourceFileName.startsWith("inputs/") ? resourceFileName : "inputs/" + resourceFileName;
+        char[][] m = InputUtils.getContentAsMatrix(path);
+
+        int count = 0;
+        int rows = m.length;
+        int cols = m[0].length;
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                // right
+                if (c + 1 < cols && m[r][c] == m[r][c + 1]) {
+                    count++;
+                }
+                // below
+                if (r + 1 < rows && c < cols && m[r][c] == m[r + 1][c]) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 }

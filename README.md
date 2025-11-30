@@ -27,3 +27,28 @@ Code solutions for Advent of Code challenge 2025 in Java
    ```
    ./gradlew test
    ```
+
+## Day 00
+As this is my first time setting up a Java project, I created a "Day 0" challenge to warm things up before AOC starts officially.
+Please pretend like this is told like a cute Elf story.
+
+### Part A
+Given an input text file, return the amount of times a characters is present below the same one.
+For example, given:
+```
+Hello
+World
+```
+
+We expect an output of 1, only the 4th letter - `l`
+```
+   v
+Hello
+World
+   ^
+```
+
+### Part B
+Same as part A, but this time, consider letters to the right as well.
+Looking at the same example as before, this time we expect to return 2, since `Hello` has 2 consecutive `l`s.
+Add that to the `l`s from part A, we get 2.

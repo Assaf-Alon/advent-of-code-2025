@@ -5,4 +5,4 @@
 build
 
 # AOC specific files
-*/input.txt
+**/inputs/day*
