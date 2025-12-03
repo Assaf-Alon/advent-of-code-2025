@@ -37,4 +37,16 @@ public final class InputUtils {
             throw new RuntimeException("Failed to read resource: " + resourcePath, e);
         }
     }
+    public static String getContentAsString(String resourcePath) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+        if (is == null) {
+            throw new IllegalArgumentException("Resource not found: " + resourcePath);
+        }
+
+        try (InputStream in = is) {
+            return new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to read resource: " + resourcePath, e);
+        }
+    }
 }
