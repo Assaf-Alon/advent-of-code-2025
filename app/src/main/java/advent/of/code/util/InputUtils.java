@@ -53,6 +53,11 @@ public final class InputUtils {
         return matrix;
     }
 
+    public static List<String> getContentAsLines(String resourcePath) {
+        String content = getContentAsString(resourcePath);
+        return List.of(content.split("\\r?\\n"));
+    }
+
     public static String getContentAsString(String resourcePath) {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
         if (is == null) {
@@ -90,4 +95,15 @@ public final class InputUtils {
         List.of(0, 1),
         List.of(1, 0)
     );
+
+    public record LongPair(Long first, Long second) implements Comparable<LongPair> {
+        @Override
+        public int compareTo(LongPair other) {
+            int firstComparison = this.first.compareTo(other.first);
+            if (firstComparison != 0) {
+                return firstComparison;
+            }
+            return this.second.compareTo(other.second);
+        }
+    }
 }
