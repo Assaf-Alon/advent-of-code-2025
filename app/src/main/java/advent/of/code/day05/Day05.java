@@ -3,7 +3,6 @@ package advent.of.code.day05;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.apache.commons.collections4.list.TreeList;
 import advent.of.code.util.InputUtils;
 import advent.of.code.util.InputUtils.LongPair;
 

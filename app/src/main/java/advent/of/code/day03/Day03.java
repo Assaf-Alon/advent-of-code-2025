@@ -1,7 +1,6 @@
 package advent.of.code.day03;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import advent.of.code.util.InputUtils;
