@@ -58,6 +58,38 @@ public final class InputUtils {
         return List.of(content.split("\\r?\\n"));
     }
 
+    public static List<String> transposeMatrixAsLines(List<String> matrix) {
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix cannot be null");
+        }
+
+        int rows = matrix.size();
+        if (rows == 0) {
+            return List.of();
+        }
+
+        int maxCols = 0;
+        for (String row : matrix) {
+            if (row != null && row.length() > maxCols) {
+                maxCols = row.length();
+            }
+        }
+
+        List<String> lines = new ArrayList<>();
+        for (int c = 0; c < maxCols; c++) {
+            StringBuilder sb = new StringBuilder();
+            for (int r = 0; r < rows; r++) {
+                String row = matrix.get(r);
+                if (row != null && c < row.length()) {
+                    sb.append(row.charAt(c));
+                }
+            }
+            lines.add(sb.toString());
+        }
+
+        return lines;
+    }
+
     public static String getContentAsString(String resourcePath) {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
         if (is == null) {
