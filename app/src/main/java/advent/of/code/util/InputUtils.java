@@ -138,4 +138,60 @@ public final class InputUtils {
             return this.second.compareTo(other.second);
         }
     }
+
+    public record LongTriplet(Long first, Long second, Long third) implements Comparable<LongTriplet> {
+        @Override
+        public int compareTo(LongTriplet other) {
+            int firstComparison = this.first.compareTo(other.first);
+            if (firstComparison != 0) {
+                return firstComparison;
+            }
+            int secondComparison = this.second.compareTo(other.second);
+            if (secondComparison != 0) {
+                return secondComparison;
+            }
+            return this.third.compareTo(other.third);
+        }
+    }
+
+    public record LongTripletPair(LongTriplet first, LongTriplet second) implements Comparable<LongTripletPair> {
+        private double getDistance() {
+            double x = Math.pow(first.first - second.first, 2);
+            double y = Math.pow(first.second - second.second, 2);
+            double z = Math.pow(first.third - second.third, 2);
+            return Math.sqrt(x + y + z);
+        }
+        
+        @Override
+        public int compareTo(LongTripletPair other) {
+            double firstVal = getDistance();
+            double secondVal = other.getDistance();
+            if (firstVal == secondVal) return 0;
+            return firstVal > secondVal ? 1 : -1;
+        }
+    }
+    
+    public static List<LongTriplet> getTriplets(String resourcePath) {
+        List<String> lines = getContentAsLines(resourcePath);
+        List<LongTriplet> triplets = new ArrayList<>();
+
+        for (String line : lines) {
+            if (line == null || line.isBlank()) {
+                continue;
+            }
+            String[] parts = line.split(",");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("Invalid triplet line (expected 3 values): " + line);
+            }
+
+            List<Long> t = new ArrayList<>(3);
+            for (String p : parts) {
+                t.add(Long.parseLong(p.trim()));
+            }
+            triplets.add(new LongTriplet(t.get(0), t.get(1), t.get(2)));
+        }
+
+        return triplets;
+    }
+    
 }
