@@ -171,6 +171,29 @@ public final class InputUtils {
         }
     }
     
+    public static List<LongPair> getPairs(String resourcePath) {
+        List<String> lines = getContentAsLines(resourcePath);
+        List<LongPair> pairs = new ArrayList<>();
+
+        for (String line : lines) {
+            if (line == null || line.isBlank()) {
+                continue;
+            }
+            String[] parts = line.split(",");
+            if (parts.length != 2) {
+                throw new IllegalArgumentException("Invalid triplet line (expected 3 values): " + line);
+            }
+
+            List<Long> t = new ArrayList<>(3);
+            for (String p : parts) {
+                t.add(Long.parseLong(p.trim()));
+            }
+            pairs.add(new LongPair(t.get(0), t.get(1)));
+        }
+
+        return pairs;
+    }
+
     public static List<LongTriplet> getTriplets(String resourcePath) {
         List<String> lines = getContentAsLines(resourcePath);
         List<LongTriplet> triplets = new ArrayList<>();
