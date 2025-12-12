@@ -137,6 +137,10 @@ public final class InputUtils {
             }
             return this.second.compareTo(other.second);
         }
+
+        public long getMultiply() {
+            return first * second;
+        }
     }
 
     public record LongTriplet(Long first, Long second, Long third) implements Comparable<LongTriplet> {
